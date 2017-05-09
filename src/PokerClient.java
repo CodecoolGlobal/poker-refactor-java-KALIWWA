@@ -1,9 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by mbeothy on 2016. 12. 08..
- */
 public class PokerClient {
 
     public Card card1;
