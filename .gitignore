@@ -88,3 +88,13 @@ fabric.properties
 hs_err_pid*
 
 # End of https://www.gitignore.io/api/java,intellij
+.idea/
+workspace.xml
+vcs.xml
+uiDesigner.xml
+poker-refactor-java-KALIWWA.iml
+modules.xml
+misc.xml
+codeStyleConfig.xml
+codeStyles/
+.idea/
