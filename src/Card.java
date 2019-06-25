@@ -1,24 +1,24 @@
 import java.util.HashMap;
 
-public class Card {
+class Card {
 
-    String cardCode;
+    private String cardCode;
 
-    public Card(String cardCode) throws IllegalArgumentException {
+    Card(String cardCode) throws IllegalArgumentException {
         this.cardCode = cardCode;
 
-        String cardColor = this.cardCode.substring(0, 1).toUpperCase();
+        validateCard(cardCode);
+    }
 
-        if (!cardColor.contentEquals("S") &&
-            !cardColor.contentEquals("C") &&
-            !cardColor.contentEquals("D") &&
-            !cardColor.contentEquals("H"))
-        {
-            throw new IllegalArgumentException("card color isn't valid: " + cardColor);
-        }
+    private void validateCard(String cardCode) {
+        checkCardColor();
 
+        validateCardValue(cardCode);
+    }
+
+    private void validateCardValue(String cardCode) {
         String cardValue = cardCode.substring(1).toUpperCase();
-        Integer intCardValue;
+        int intCardValue;
 
         HashMap<String, Integer> alphabeticCardValue = new HashMap<>();
         alphabeticCardValue.put("J", 11);
@@ -39,7 +39,19 @@ public class Card {
         }
     }
 
-    public int getValue() {
+    private void checkCardColor() {
+        String cardColor = this.cardCode.substring(0, 1).toUpperCase();
+
+        if (!cardColor.contentEquals("S") &&
+            !cardColor.contentEquals("C") &&
+            !cardColor.contentEquals("D") &&
+            !cardColor.contentEquals("H"))
+        {
+            throw new IllegalArgumentException("card color isn't valid: " + cardColor);
+        }
+    }
+
+    int getValue() {
         HashMap<String, Integer> alphabeticCardValue = new HashMap<>();
         alphabeticCardValue.put("J", 11);
         alphabeticCardValue.put("Q", 12);
