@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 class PokerClient {
@@ -18,38 +19,59 @@ class PokerClient {
     }
 
     boolean highestCardIsMine(String p1, String p2, String p3, String p4, String p5) {
-        Card hc = new Card("s2");
+//        Card highCard = new Card("s2");
+        List<Card> myDeck = createMyDeck();
+        List<Card> oppDeck = createOppDeck(p1, p2, p3, p4, p5);
+
+        Iterator<Card> myIterator = myDeck.iterator();
+        Iterator<Card> oppIterator = oppDeck.iterator();
+
+        while (myIterator.hasNext()) {
+            while (oppIterator.hasNext()) {
+                if (myIterator.next().getValue() > oppIterator.next().getValue()) {
+                    oppIterator.remove();
+                } else {
+                    myIterator.remove();
+                }
+            }
+        }
+
+//        for (Card myCard : myDeck) {
+//            for (Card oppCard : oppDeck) {
+//                if (oppCard.getValue() >= myCard.getValue()) {
+//                    if (oppCard.getValue() >= highCard.getValue()) {
+//                        highCard = oppCard;
+//                    }
+//                } else {
+//                    if (myCard.getValue() > highCard.getValue()) {
+//                        highCard = myCard;
+//                    }
+//                }
+//            }
+//        }
+//        return myDeck.contains(highCard);
+
+        return !myDeck.isEmpty();
+    }
+
+    private List<Card> createOppDeck(String p1, String p2, String p3, String p4, String p5) {
         List<Card> o = new ArrayList<>();
-        List<Card> m = new ArrayList<>();
         o.add(new Card(p1.toUpperCase()));
         o.add(new Card(p2.toUpperCase()));
         o.add(new Card(p3.toUpperCase()));
         o.add(new Card(p4.toUpperCase()));
         o.add(new Card(p5.toUpperCase()));
+        return o;
+    }
+
+    private List<Card> createMyDeck() {
+        List<Card> m = new ArrayList<>();
         m.add(card1);
         m.add(card2);
         m.add(card3);
         m.add(card4);
         m.add(card5);
-
-        for (Card mc : m) {
-            for (Card oc : o) {
-                int myCardValue = mc.getValue();
-                int oppCardValue = oc.getValue();
-
-                if (oppCardValue >= myCardValue) {
-                    if (oppCardValue >= hc.getValue()) {
-                        hc = oc;
-                    }
-                } else {
-                    if (myCardValue > hc.getValue()) {
-                        hc = mc;
-                    }
-                }
-            }
-        }
-
-        return m.contains(hc);
+        return m;
     }
 
 }

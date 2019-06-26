@@ -3,6 +3,16 @@ import java.util.HashMap;
 class Card {
 
     private String cardCode;
+    private final String SPADES = "S";
+    private final String CLUBS = "C";
+    private final String DIAMONDS = "D";
+    private final String HEARTS = "H";
+    private final String JACK = "J";
+    private final String QUEEN = "Q";
+    private final String KING = "K";
+    private final String ACE = "A";
+
+    private HashMap<String, Integer> alphabeticCardValue = createCardMap();
 
     Card(String cardCode) throws IllegalArgumentException {
         this.cardCode = cardCode;
@@ -11,20 +21,13 @@ class Card {
     }
 
     private void validateCard(String cardCode) {
-        checkCardColor();
-
+        validateCardColor();
         validateCardValue(cardCode);
     }
 
     private void validateCardValue(String cardCode) {
         String cardValue = cardCode.substring(1).toUpperCase();
         int intCardValue;
-
-        HashMap<String, Integer> alphabeticCardValue = new HashMap<>();
-        alphabeticCardValue.put("J", 11);
-        alphabeticCardValue.put("Q", 12);
-        alphabeticCardValue.put("K", 13);
-        alphabeticCardValue.put("A", 14);
 
         if (alphabeticCardValue.get(cardCode.substring(1).toUpperCase()) == null) {
             // raises exception if cardValue is a letter, but not J/Q/K/A
@@ -39,24 +42,18 @@ class Card {
         }
     }
 
-    private void checkCardColor() {
+    private void validateCardColor() {
         String cardColor = this.cardCode.substring(0, 1).toUpperCase();
 
-        if (!cardColor.contentEquals("S") &&
-            !cardColor.contentEquals("C") &&
-            !cardColor.contentEquals("D") &&
-            !cardColor.contentEquals("H"))
-        {
+        if (!cardColor.contentEquals(SPADES) &&
+                !cardColor.contentEquals(CLUBS) &&
+                !cardColor.contentEquals(DIAMONDS) &&
+                !cardColor.contentEquals(HEARTS)) {
             throw new IllegalArgumentException("card color isn't valid: " + cardColor);
         }
     }
 
     int getValue() {
-        HashMap<String, Integer> alphabeticCardValue = new HashMap<>();
-        alphabeticCardValue.put("J", 11);
-        alphabeticCardValue.put("Q", 12);
-        alphabeticCardValue.put("K", 13);
-        alphabeticCardValue.put("A", 14);
 
         String cardValue = cardCode.substring(1).toUpperCase();
         Integer intCardValue;
@@ -68,5 +65,14 @@ class Card {
         }
 
         return intCardValue;
+    }
+
+    private HashMap<String, Integer> createCardMap() {
+        return new HashMap<String, Integer>() {{
+            put(JACK, 11);
+            put(QUEEN, 12);
+            put(KING, 13);
+            put(ACE, 14);
+        }};
     }
 }
