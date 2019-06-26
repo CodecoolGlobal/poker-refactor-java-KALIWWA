@@ -3,7 +3,6 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class PokerClientTest {
-//    private PokerClient pokerClient = new PokerClient("h3", "d2", "s3", "s4", "cq");
 
     @Test
     void highestCardIsMine_CorrectData_true() {
@@ -20,7 +19,7 @@ class PokerClientTest {
     @Test
     void highestCardIsMine_InvalidCardColor() {
         PokerClient pokerClient = new PokerClient("h3", "d2", "s3", "s4", "cq");
-        assertThrows(IllegalArgumentException.class , () -> pokerClient.highestCardIsMine("rf", "ss", "56", "v5", "zz"));
+        assertThrows(IllegalArgumentException.class, () -> pokerClient.highestCardIsMine("rf", "ss", "56", "v5", "zz"));
     }
 
     @Test

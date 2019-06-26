@@ -23,26 +23,6 @@ class PokerClient {
         List<Card> myDeck = createMyDeck();
         List<Card> oppDeck = createOppDeck(p1, p2, p3, p4, p5);
 
-//        Iterator<Card> myIterator = myDeck.iterator();
-//        ListIterator<Card> oppIterator = oppDeck.listIterator();
-//
-//        int oppCounter = 0;
-//
-//        while (myIterator.hasNext()) {
-//            while (oppIterator.hasNext()) {
-//                if (myIterator.next().getValue() > oppIterator.next().getValue()) {
-//                    oppIterator.remove();
-//                } else {
-//                    myIterator.remove();
-//                }
-////                for (int i = 0; i < oppCounter; i++) {
-////                    oppIterator.previous();
-////                }
-////                myIterator.next();
-//
-//            }
-//        }
-
         Card highCard = new Card("s2");
         for (Card myCard : myDeck) {
             for (Card oppCard : oppDeck) {
@@ -59,6 +39,28 @@ class PokerClient {
         }
         return myDeck.contains(highCard);
 
+//        Iterator<Card> myIterator = myDeck.iterator();
+//        ListIterator<Card> oppIterator = oppDeck.listIterator();
+//
+//        int oppCounter = 0;
+//
+//        while (myIterator.hasNext()) {
+//            while (oppIterator.hasNext()) {
+//                if (myIterator.next().getValue() > oppIterator.next().getValue()) {
+//                    oppIterator.remove();
+//                } else {
+//                    myIterator.remove();
+//                }
+//                for (int i = 0; i < oppCounter; i++) {
+//                    oppIterator.previous();
+//                }
+//                myIterator.next();
+//
+//            }
+//        }
+//
+//
+//
 //        return myDeck.size() > oppDeck.size();
     }
 

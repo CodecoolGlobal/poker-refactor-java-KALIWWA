@@ -5,26 +5,40 @@ import java.util.List;
 class Card {
 
     private String cardCode;
-    private final String SPADES = "S";
-    private final String CLUBS = "C";
-    private final String DIAMONDS = "D";
-    private final String HEARTS = "H";
-    private final String JACK = "J";
-    private final String QUEEN = "Q";
-    private final String KING = "K";
-    private final String ACE = "A";
+    private static String SPADES = "S";
+    private static String CLUBS = "C";
+    private static String DIAMONDS = "D";
+    private static String HEARTS = "H";
+    private static String JACK = "J";
+    private static String QUEEN = "Q";
+    private static String KING = "K";
+    private static String ACE = "A";
 
     private HashMap<String, Integer> alphabeticCardValue = createCardMap();
 
     Card(String cardCode) throws IllegalArgumentException {
         this.cardCode = cardCode;
-
         validateCard(cardCode);
     }
 
     private void validateCard(String cardCode) {
         validateCardColor();
         validateCardValue(cardCode);
+    }
+
+    private void validateCardColor() {
+        String cardColor = this.cardCode.substring(0, 1).toUpperCase();
+
+        List<String> cardColors = new ArrayList<String>() {{
+            add(SPADES);
+            add(CLUBS);
+            add(DIAMONDS);
+            add(HEARTS);
+        }};
+
+        if (!cardColors.contains(cardColor)) {
+            throw new IllegalArgumentException("card color isn't valid: " + cardColor);
+        }
     }
 
     private void validateCardValue(String cardCode) {
@@ -41,21 +55,6 @@ class Card {
                 throw new IllegalArgumentException("card number isn't valid: " + intCardValue);
             }
 
-        }
-    }
-
-    private void validateCardColor() {
-        String cardColor = this.cardCode.substring(0, 1).toUpperCase();
-
-        List<String> cardColors = new ArrayList<String>() {{
-            add(SPADES);
-            add(CLUBS);
-            add(DIAMONDS);
-            add(HEARTS);
-        }};
-
-        if (!cardColors.contains(cardColor)) {
-            throw new IllegalArgumentException("card color isn't valid: " + cardColor);
         }
     }
 
