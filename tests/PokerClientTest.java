@@ -6,9 +6,15 @@ class PokerClientTest {
 //    private PokerClient pokerClient = new PokerClient("h3", "d2", "s3", "s4", "cq");
 
     @Test
-    void highestCardIsMine_CorrectData() {
+    void highestCardIsMine_CorrectData_true() {
         PokerClient pokerClient = new PokerClient("h3", "d2", "s3", "s4", "cq");
         assertTrue(pokerClient.highestCardIsMine("s3", "h4", "s5", "d6", "sj"));
+    }
+
+    @Test
+    void highestCardIsMine_CorrectData_false() {
+        PokerClient pokerClient = new PokerClient("h3", "d2", "s3", "s4", "cj");
+        assertFalse(pokerClient.highestCardIsMine("s3", "h4", "s5", "d6", "sq"));
     }
 
     @Test

@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 class PokerClient {
 
@@ -19,39 +20,46 @@ class PokerClient {
     }
 
     boolean highestCardIsMine(String p1, String p2, String p3, String p4, String p5) {
-//        Card highCard = new Card("s2");
         List<Card> myDeck = createMyDeck();
         List<Card> oppDeck = createOppDeck(p1, p2, p3, p4, p5);
 
-        Iterator<Card> myIterator = myDeck.iterator();
-        Iterator<Card> oppIterator = oppDeck.iterator();
+//        Iterator<Card> myIterator = myDeck.iterator();
+//        ListIterator<Card> oppIterator = oppDeck.listIterator();
+//
+//        int oppCounter = 0;
+//
+//        while (myIterator.hasNext()) {
+//            while (oppIterator.hasNext()) {
+//                if (myIterator.next().getValue() > oppIterator.next().getValue()) {
+//                    oppIterator.remove();
+//                } else {
+//                    myIterator.remove();
+//                }
+////                for (int i = 0; i < oppCounter; i++) {
+////                    oppIterator.previous();
+////                }
+////                myIterator.next();
+//
+//            }
+//        }
 
-        while (myIterator.hasNext()) {
-            while (oppIterator.hasNext()) {
-                if (myIterator.next().getValue() > oppIterator.next().getValue()) {
-                    oppIterator.remove();
+        Card highCard = new Card("s2");
+        for (Card myCard : myDeck) {
+            for (Card oppCard : oppDeck) {
+                if (oppCard.getValue() >= myCard.getValue()) {
+                    if (oppCard.getValue() >= highCard.getValue()) {
+                        highCard = oppCard;
+                    }
                 } else {
-                    myIterator.remove();
+                    if (myCard.getValue() > highCard.getValue()) {
+                        highCard = myCard;
+                    }
                 }
             }
         }
+        return myDeck.contains(highCard);
 
-//        for (Card myCard : myDeck) {
-//            for (Card oppCard : oppDeck) {
-//                if (oppCard.getValue() >= myCard.getValue()) {
-//                    if (oppCard.getValue() >= highCard.getValue()) {
-//                        highCard = oppCard;
-//                    }
-//                } else {
-//                    if (myCard.getValue() > highCard.getValue()) {
-//                        highCard = myCard;
-//                    }
-//                }
-//            }
-//        }
-//        return myDeck.contains(highCard);
-
-        return !myDeck.isEmpty();
+//        return myDeck.size() > oppDeck.size();
     }
 
     private List<Card> createOppDeck(String p1, String p2, String p3, String p4, String p5) {
