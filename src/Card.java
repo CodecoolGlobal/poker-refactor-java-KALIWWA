@@ -1,4 +1,6 @@
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 class Card {
 
@@ -45,10 +47,14 @@ class Card {
     private void validateCardColor() {
         String cardColor = this.cardCode.substring(0, 1).toUpperCase();
 
-        if (!cardColor.contentEquals(SPADES) &&
-                !cardColor.contentEquals(CLUBS) &&
-                !cardColor.contentEquals(DIAMONDS) &&
-                !cardColor.contentEquals(HEARTS)) {
+        List<String> cardColors = new ArrayList<String>() {{
+            add(SPADES);
+            add(CLUBS);
+            add(DIAMONDS);
+            add(HEARTS);
+        }};
+
+        if (!cardColors.contains(cardColor)) {
             throw new IllegalArgumentException("card color isn't valid: " + cardColor);
         }
     }
