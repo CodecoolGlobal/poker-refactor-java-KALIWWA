@@ -15,6 +15,12 @@ class Card {
     private static String ACE = "A";
 
     private HashMap<String, Integer> alphabeticCardValue = createCardMap();
+    private List<String> cardColors = new ArrayList<String>() {{
+        add(SPADES);
+        add(CLUBS);
+        add(DIAMONDS);
+        add(HEARTS);
+    }};
 
     Card(String cardCode) throws IllegalArgumentException {
         this.cardCode = cardCode;
@@ -29,13 +35,6 @@ class Card {
     private void validateCardColor() {
         String cardColor = this.cardCode.substring(0, 1).toUpperCase();
 
-        List<String> cardColors = new ArrayList<String>() {{
-            add(SPADES);
-            add(CLUBS);
-            add(DIAMONDS);
-            add(HEARTS);
-        }};
-
         if (!cardColors.contains(cardColor)) {
             throw new IllegalArgumentException("card color isn't valid: " + cardColor);
         }
@@ -48,28 +47,17 @@ class Card {
         if (alphabeticCardValue.get(cardCode.substring(1).toUpperCase()) == null) {
             // raises exception if cardValue is a letter, but not J/Q/K/A
             intCardValue = Integer.parseInt(cardValue);
-            if (intCardValue > 10) {
+            if ((intCardValue > 10) || (intCardValue < 2)) {
                 throw new IllegalArgumentException("card number isn't valid: " + intCardValue);
             }
-            if (intCardValue < 2) {
-                throw new IllegalArgumentException("card number isn't valid: " + intCardValue);
-            }
-
         }
     }
 
     int getValue() {
 
         String cardValue = cardCode.substring(1).toUpperCase();
-        Integer intCardValue;
-
-        if (alphabeticCardValue.get(cardCode.substring(1).toUpperCase()) == null) {
-            intCardValue = Integer.parseInt(cardValue);
-        } else {
-            intCardValue = alphabeticCardValue.get(cardCode.substring(1).toUpperCase());
-        }
-
-        return intCardValue;
+        Integer intCardValue = alphabeticCardValue.get(cardValue);
+        return intCardValue == null ? Integer.parseInt(cardValue) : intCardValue;
     }
 
     private HashMap<String, Integer> createCardMap() {
@@ -79,5 +67,10 @@ class Card {
             put(KING, 13);
             put(ACE, 14);
         }};
+    }
+
+    @Override
+    public String toString() {
+        return cardCode;
     }
 }
